@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        body, html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("abc.jpeg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+        #user,
+        #pass {
+            text-align:left;
+            height: 35px;
+            width: 50%;
+            border-radius: 10px;
+            font-weight: bold;
+            background-color: lightblue
+    
+
+        }
+
+
+        .box {
+            border: 1px solid rgb(0, 0, 0);
+            width: 600px;
+            background-color: plum(57, 185, 179);
+            border-radius: 10px;
+        }
+
+
+        #saame {
+            
+            font-size: 20px;
+            font-family: arial;
+            font-weight: bold;
+            color: rgb(28, 28, 43);
+        }
+
+        #btn,#button1,#button2 {
+            height: 44px;
+            color: rgb(15, 17, 15);
+            font-size: 23px;
+            padding: 7px;
+            background-color: rgb(109, 184, 167);
+            width: 25%;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 20px
+
+        }
+        #button1 a,#button2 a{
+            text-decoration: none;
+            color: black;
+        }
+
+        h1 {
+            font-size: 45px;
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-shadow: 4px 4px 5px #dd1313;
+        }
+        span{
+            color:red;
+        }
+        #btn:hover,#button1:hover,#button2:hover {
+  color:black;
+  background-color: rgb(201, 137, 64);
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+
+#check{
+    padding-top: 5px;
+    justify-content: center;
+    align-items: center;
+    /* display: flex; */
+    /* float: left; */
+}
+#pass{
+box-sizing: border-box;
+float: left;
+margin-left: 145px;
+}
+
+     
+
+     
+    </style>
+</head>
+
+<body style="background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(60, 149, 172));">
+    
+    <form action="successful.html" onsubmit="return validation()">
+        <center>
+            <div class="box">
+
+                <h1>Login Here</h1>
+                
+
+                <label for="uname" id="saame" class="required">User Name</label><br>
+                <input class="user_name" name="login" type="text"  onkeyup="username_validate(this)" oninput="space1(this)" placeholder="Must be char,number and speacial char" id="user" maxlength="20" autocomplete="off" >
+                <br>
+                <span id="uuname"></span>
+                <br><br>
+
+                <label for="password" id="saame" class="required">Password</label><br>
+                <input type="password" name="password" onkeyup="pasword_validation(this)" placeholder="Enter Here" oninput="space(this)" id="pass" autocomplete="off" maxlength="20" >
+                <br>
+                <input type="checkbox" oninput="showpass()" id="check">Show Password
+                <br>
+                <span id="pas"></span>
+                <br><br>
+
+
+              
+                <button id="btn"  value="sumbit" >Sign In</button><br><br>
+                <button id="button1"><a href="registration (2).html" >Sign Up</a></button>
+                <button id="button2"><a href="frgt.html">Forget password</a></button>
+                <br><br>
+            </div>
+        </center>
+    </form>
+    <script>
+
+            function fun(input){
+                if(/^\s./.test(input.value))
+                input.value='';
+        }
+        function space1(input){
+    var regex = /[^A-Za-z0-9!@#%&$*._]/gi;
+    input.value= input.value.replace(regex,"");
+}
+
+function space(input){
+    var regex = /[^A-Za-z0-9-!@#%&$*._]/g;
+    input.value= input.value.replace(regex,"");
+}
+  
+
+
+        let username_validate_nameError = true;
+        let pasword_validation_nameError = true;
+        
+        
+       
+        
+        function username_validate(){
+                var username = document.getElementById("user").value;
+                
+                if (username == "") {
+                    document.getElementById('uuname').innerHTML = "**Please field the Last Name";
+                    username_validate_nameError = false;
+                    return false;
+                }else if(/^[A-z][a-z0-9_-]$/.test( username )){
+                    document.getElementById('uuname').innerHTML = "** Invalid";
+                    username_validate_nameError = false;
+                    return false;
+                }else if(username.indexOf(" ") >-1) {
+                    document.getElementById('uuname').innerHTML = "** Space not allowed";
+                    username_validate_nameError = false;
+                    return false;
+                }else if (username.length < 2 || username.length > 20) {
+                    document.getElementById('uuname').innerHTML = "** user Length must be Between 2 and 20";
+                    username_validate_nameError = false;
+                    return false;
+                }else{
+                     document.getElementById('uuname').innerHTML = "";
+                     username_validate_nameError = true;
+                }
+        }
+       
+        
+        
+        
+        function pasword_validation() {
+
+      
+var passs = document.getElementById("pass").value;
+
+
+if (passs == "") {
+    document.getElementById('pas').innerHTML = "** include spcl char,number,char";
+    pasword_validation_nameError = false;
+}
+
+else if ((passs.length) < 8 || (passs.lenth > 16)) {
+    document.getElementById('pas').innerHTML = "** Password  must be Between 8 and 16";
+    pasword_validation_nameError =  false;
+}else if(/^[a-zA-Z0-9]+$/.test( passs )){
+            document.getElementById('pas').innerHTML = "** Invalid";
+            pasword_validation_nameError =  false;
+}
+else{
+    document.getElementById('pas').innerHTML = "";
+    pasword_validation_nameError = true;
+}
+        }
+
+        function showpass(){
+            var x = document.getElementById("pass");
+            if(x.type==="password"){
+                x.type="text"
+            }else{
+                x.type="password"
+            }
+            
+        }
+
+        function validation(){
+            
+            username_validate();
+            pasword_validation();
+
+            if(username_validate_nameError == true && pasword_validation_nameError == true){
+                alert("Successfull Login")
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        
+        }	
+            
+    
+        </script>
+            
+</body>
+ 
+
+
+
+
+    </html>
